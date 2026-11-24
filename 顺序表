@@ -1,0 +1,158 @@
+#define MaxSize 50          // 定义最大长度
+typedef struct {
+    ElemType data[MaxSize]; // 用静态数组存放数据元素
+    int length;             // 顺序表的当前长度
+} SqList;
+#define InitSize 100
+typedef struct {
+    ElemType *data;         // 指示动态分配数组的指针
+    int MaxSize, length;    // 数组的最大容量和当前个数
+} SqList;
+void InitList(SqList &L) {
+    for (int i = 0; i < MaxSize; i++)
+        L.data[i] = 0;      // 防止"脏数据"
+    L.length = 0;
+}
+bool ListInsert(SqList &L, int i, ElemType e) {
+    if (i < 1 || i > L.length + 1)   // 判断 i 的范围是否合法
+        return false;
+    if (L.length >= MaxSize)         // 存储空间已满
+        return false;
+    for (int j = L.length; j >= i; j--)  // 从最后一个元素开始后移
+        L.data[j] = L.data[j - 1];
+    L.data[i - 1] = e;             // 位序 i 对应下标 i-1
+    L.length++;
+    return true;
+}
+bool ListDelete(SqList &L, int i, ElemType &e) {
+    if (i < 1 || i > L.length)     // 判断 i 的范围是否合法
+        return false;
+    e = L.data[i - 1];             // 将被删除元素赋值给 e
+    for (int j = i; j < L.length; j++)  // 从第 i+1 个元素开始前移
+        L.data[j - 1] = L.data[j];
+    L.length--;
+    return true;
+}
+ElemType GetElem(SqList L, int i) {   // 按位序查找
+    return L.data[i - 1];
+}
+
+int LocateElem(SqList L, ElemType e) { // 按值查找，返回位序
+    for (int i = 0; i < L.length; i++)
+        if (L.data[i] == e)
+            return i + 1;             // 返回位序
+    return 0;                         // 查找失败
+}
+课后习题
+bool Del_Min(SqList &L ElemType &value){
+if(L.length == 0){
+return false;
+}
+value = L.data[0];
+int pos = 0;
+for(int i = 0;i < L.length;i++){
+if(L.data[i] < value){
+value = L.data[i];
+pos = i;
+}
+L.data[pos] = L.data[i-1];//空出的位置有最后一个元素填补
+length--;
+}
+return true;
+}
+
+void Reverse(SqList &L){
+ElemType temp;//辅助变量
+for(int i = 0;i < L.length/2;i++){
+ElemType temp = L.data[i];//交换L.data[i]和L.data[length-1-i]
+L.data[i] = L.data[length-1-i];
+L.data[length-1-i] = temp;
+}
+}
+
+void Del_x_l(SqLlist &L,ElemType &x){
+int k = 0,i
+for(i = 0;i < L.length;i++){
+if(L.data[i] != x){
+L.data[k] = L.data[i];
+k++;
+}
+L.length = k;
+}
+}
+
+bool Del_s_t(SqList &L,ElemType s,ElemType t){
+int i ,k = 0;
+if(L.length == 0 || s >= t){
+return false;
+}
+for(i =0;i < L.length;i++){
+if(L.data[i] >= s && L.data[i] <= t){
+k++;
+}
+else{
+L.data[i-k] = L.data[i];
+}
+}
+L.length -= k;
+return true;
+}
+
+bool merge(SeqList a,SeqList b, SeqList &c){
+if(a.length + b.length > c.Maxsize){
+return false;
+}
+int i , j ,k;
+while(i < a.length && j < b.length){
+if(a.data[i] < b.data[j]){
+c.data[k++] = a.data[i++];
+}
+else{
+c.data[k++] = b.data[j++];
+}
+while(i < a.length){
+c.data[k++] = a.data[i++];
+}
+while(j < b.length){
+c.data[k++] = b.data[j++];
+}
+c.length = k;
+}
+return true;
+}
+
+typedef int DataType;
+void Revese(DataType A[],int left,int right,int arraySize){
+if(left >= right || right >= arraySize){
+return ;
+}
+int mid = (right + left)/2;
+for(int i = 0;i < mid;i++){
+DataType temp = A[left+i];
+A[left+i] = A[right-i];
+A[right-i] = temp;
+}
+}
+voidExchange(DataType A[],int m,int n,int arraySize){
+Revese(A,0,m+n-1,arraySize);
+Revese(A,0,n-1,arraySize);
+Revese(A,n-1,n+m-1,arraySize);
+}
+
+void samekey(int A[],int B[],int C[],int n){
+int i = j = k = 0;
+while(i < n && j < n && k < n){
+if(A[i] == B[j] == C[k]){
+printf("%d/n",A[i]);
+i++,j++,k++;
+}
+else{
+int MaxNum = Max(A[i]Max(B[j] , C[k]));
+if(A[i] < MaxNum) i++;
+if(B[j] < MaxNum) j++;
+if(C[k] < MaxNum) k++;
+}
+}
+}
+
+
