@@ -1,0 +1,75 @@
+10.
+可开辅助空间
+void func(int R[],int n,int p){
+int temp = (int*)malloc(sizeof(int)*p);
+for(int i = 0;i < n;i++){
+int temp[i] = R[i];
+}
+for(int i = p;i < n;i++){
+R[i-p] = R[i];
+}
+for(int i = 0;i < n;i++){
+R[i+n-p] = temp[i];
+}
+}
+时O（n+p）
+空O(n)
+无辅助空间
+void Reverse(int R[],int from,int to){
+int i,temp;
+for(int i = 0;i < (to-from)/2;i++){
+temp = R[from+i];
+R[from+i] = R[to-i];
+R[to-i] = temp;
+}
+}
+void(int R[],int n,int p){
+Reverse(R,0,p-1);
+Reverse(R,p,n-1);
+Reverse(R,0,p-1);
+}
+11.
+有辅助空间（双指针两数组进行归并）
+void(int a[],int b[],int a,int b){
+int *temp = (int*)malloc(sizeof(int)*(a+b));
+int i = 0,j = 0,k = 0;
+while(i < a && j < b){
+if(a[i] < b[j]){
+temp[k++] = a[i++];
+}else{
+temp[k++] = b[j++];
+}
+while(i < a) temp[k++] = a[i++];
+while(j < b) temp[k++] = b[j++];
+}
+}
+时O（2L）空O(2L)
+无需辅助空间
+func(int s[],int b[],int L){
+int ans = 0,count = 0;
+while(i < L && j < L){
+if(s[i] < b[j]){
+ans = s[i++];
+}else{
+ans = b[j++];
+}
+count ++;
+}
+if(count = L) return ans;
+}
+其中过程可以用三目运算符
+ans = s[i] < b[j]?s[i++];b[j++];
+12.
+void func(int A[],int n){
+int*temp = (int*)malloc(sizeof(int)*n);
+for(int i = 0;i < n;i++) temp[i] = 0;
+for(int i = 0;i < n;i++){
+temp[a[i]]++;
+if(temp[a[i]] > n/2){
+ printf("%d/n",a[i]);
+ return;
+}
+}
+printf("%d",-1);
+}
+
